@@ -8,6 +8,9 @@ class GestureRecognizer:
         self.mp_hands = mp.solutions.hands
         self.hands = self.mp_hands.Hands(min_detection_confidence=0.5, min_tracking_confidence=0.5)
 
+
+
+    #modify this method to detect any hand signal you want eg detecting thumbs down, thumbs up etc 
     def detect_peace_sign(self, hand_landmarks):
         # Get the tip of the middle finger, index finger, and wrist
         middle_finger_tip = hand_landmarks.landmark[self.mp_hands.HandLandmark.MIDDLE_FINGER_TIP]
@@ -37,20 +40,26 @@ class GestureRecognizer:
             if peace_sign_angle_range[0] < angle < peace_sign_angle_range[1]:
                 return True
 
+
+
+
+
+    #this proceses the video frames for gesture recognition
     def process_video(self):
-        cap = cv2.VideoCapture(0)
+        cap = cv2.VideoCapture(0)#starts video feed 
 
         while True:
-            ret, frame = cap.read()
-            frame = cv2.flip(frame, 1)
-            frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            ret, frame = cap.read()                               #reads frames in video feed
+            frame = cv2.flip(frame, 1)                            #flips frames horizontally
+            frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)    #converts frame from BGR to RGB
 
-            frame_rgb.flags.writeable = False
-            result = self.hands.process(frame_rgb)
+            frame_rgb.flags.writeable = False                     #this improves performance in Mediapipe
+            result = self.hands.process(frame_rgb)                #processing frame to detect hand landmarks
             frame_rgb.flags.writeable = True
 
-            frame = cv2.cvtColor(frame_rgb, cv2.COLOR_RGB2BGR)
-
+            frame = cv2.cvtColor(frame_rgb, cv2.COLOR_RGB2BGR)     #converting frame to BGR for rendering
+            
+            #drawing landmarks on the frame if hands are detected
             if result.multi_hand_landmarks:
                 for lms in result.multi_hand_landmarks:
                     self.mp_draw.draw_landmarks(frame, lms, self.mp_hands.HAND_CONNECTIONS,
@@ -61,7 +70,7 @@ class GestureRecognizer:
                     if self.detect_peace_sign(lms):
                         cv2.putText(frame, "Peace!", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
 
-            cv2.imshow("junction2021", frame)
+            cv2.imshow("Peace Sign Hands Detection ", frame)
 
             if cv2.waitKey(1) & 0xFF == 27:
                 break
