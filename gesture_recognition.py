@@ -67,7 +67,7 @@ class GestureRecognizer:
             y_pos += 50
 
     def __result_callback(self, result, output_image, timestamp_ms):
-        print(f'gesture recognition result: {result}')
+        #print(f'gesture recognition result: {result}')  #print the whole result 
         self.lock.acquire() # solves potential concurrency issues
         self.current_gestures = []
         if result is not None and any(result.gestures):
