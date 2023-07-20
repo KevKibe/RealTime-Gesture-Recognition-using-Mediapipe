@@ -9,7 +9,7 @@ class GestureRecognizer:
         self.hands = self.mp_hands.Hands(max_num_hands=2, min_detection_confidence=0.5, min_tracking_confidence=0.5)
 
 
-
+    
     #modify this method to detect any hand signal you want eg detecting thumbs down, thumbs up etc 
     def detect_peace_sign(self, hand_landmarks):
         # Get the tip of the middle finger, index finger, and wrist
@@ -41,30 +41,48 @@ class GestureRecognizer:
                 return True
 
   
+    def detect_thumbsup(self,hand_landmarks):
+        # Get the tip of the thumb and the tip of the index finger
+        thumb_tip = hand_landmarks.landmark[self.mp_hands.HandLandmark.THUMB_TIP]
+        index_finger_tip = hand_landmarks.landmark[self.mp_hands.HandLandmark.INDEX_FINGER_TIP]
 
-    def detect_two_fists(self, hand_landmarks):
-        # Check if two fists are detected
-        if hand_landmarks == 2:
-            # Define a threshold for the angle range to detect fists facing the camera
-            fist_angle_threshold = 30  # Adjust this threshold based on testing
+        # Calculate the Euclidean distance between the thumb tip and the index finger tip
+        distance = ((thumb_tip.x - index_finger_tip.x)**2 + (thumb_tip.y - index_finger_tip.y)**2)**0.5
 
-        # Calculate the angle between the fingers and the wrist using dot product for both hands
-        for hand_landmarks in hand_landmarks:
-            middle_finger_tip = hand_landmarks.landmark[self.mp_hands.HandLandmark.MIDDLE_FINGER_TIP]
-            index_finger_tip = hand_landmarks.landmark[self.mp_hands.HandLandmark.INDEX_FINGER_TIP]
-            wrist = hand_landmarks.landmark[self.mp_hands.HandLandmark.WRIST]
+        # Define a threshold to consider it a thumbs-up gesture
+        thumb_up_threshold = 0.08
 
-            dot_product = (middle_finger_tip.x - wrist.x) * (index_finger_tip.x - wrist.x) + (middle_finger_tip.y - wrist.y) * (index_finger_tip.y - wrist.y)
-            mag_middle = math.sqrt((middle_finger_tip.x - wrist.x)**2 + (middle_finger_tip.y - wrist.y)**2)
-            mag_index = math.sqrt((index_finger_tip.x - wrist.x)**2 + (index_finger_tip.y - wrist.y)**2)
-            cos_angle = dot_product / (mag_middle * mag_index)
+        # Check if the distance is below the threshold (thumbs-up)
+        if distance < thumb_up_threshold:
+            return True
+        else:
+            return False
 
-            # Calculate the angle in degrees
-            angle = math.degrees(math.acos(cos_angle))
+    #modify this method to detect any hand signal you want eg detecting thumbs down, thumbs up etc 
+    #this method returns ngumi mbwegze print statement
+    def detect_two_fists(self, hand_landmarks_list):
+        # Check if two hands are detected
+        if hand_landmarks_list == 2:
+            # Define a threshold for the distance between finger tips and the wrist
+            fist_distance_threshold = 0.5  # Adjust this threshold based on testing
 
-            # Check if the angle is within the fist angle threshold
-            if angle < fist_angle_threshold:
-                return True  
+            # Check each hand for a fist
+            for hand_landmarks in hand_landmarks_list:
+                middle_finger_tip = hand_landmarks.landmark[self.mp_hands.HandLandmark.MIDDLE_FINGER_TIP]
+                index_finger_tip = hand_landmarks.landmark[self.mp_hands.HandLandmark.INDEX_FINGER_TIP]
+                wrist = hand_landmarks.landmark[self.mp_hands.HandLandmark.WRIST]
+
+                # Calculate the distance between the middle finger tip and the wrist
+                distance_middle_to_wrist = math.sqrt((middle_finger_tip.x - wrist.x)**2 + (middle_finger_tip.y - wrist.y)**2)
+
+                # Calculate the distance between the index finger tip and the wrist
+                distance_index_to_wrist = math.sqrt((index_finger_tip.x - wrist.x)**2 + (index_finger_tip.y - wrist.y)**2)
+
+                # Check if both fingers are close to the wrist (forming a fist)
+                if distance_middle_to_wrist < fist_distance_threshold and distance_index_to_wrist < fist_distance_threshold:
+                    return True
+
+        return False
 
 
 
@@ -93,8 +111,12 @@ class GestureRecognizer:
                     # Detect the gesture and display the text output                        
                     if self.detect_peace_sign(hand_landmarks):
                         #text in frame if gesture is detected
-                        cv2.putText(frame, "Peace!", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+                        cv2.putText(frame, "Peace..out", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
                     
+                    if self.detect_thumbsup(hand_landmarks):
+                        #text in frame if gesture is detected
+                        cv2.putText(frame, "Thumbs Up", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+
                     if self.detect_two_fists(hand_landmarks):
                         #text in frame if gesture is detected
                         cv2.putText(frame, "Ngumi Mbwegze", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
@@ -110,3 +132,12 @@ class GestureRecognizer:
 if __name__ == "__main__":
     recognizer = GestureRecognizer()
     recognizer.process_video()
+
+
+
+
+
+
+
+
+
