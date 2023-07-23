@@ -7,7 +7,7 @@ class GestureRecognizer:
     def main(self):
         #setting parameters for the gesture recognition
         num_hands = 2
-        model_path = "baseline_model.task"
+        model_path = "custom_model_2.task"
         GestureRecognizer = mp.tasks.vision.GestureRecognizer
         GestureRecognizerOptions = mp.tasks.vision.GestureRecognizerOptions
         VisionRunningMode = mp.tasks.vision.RunningMode
