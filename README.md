@@ -17,6 +17,6 @@
 ## Usage
 - Assign the variable model path to one of the models. For example `model_path = "custom_model_2.task"`.
 - Run the application by running the command `python gesture_recognition.py` in the terminal.
-- To close the application press teh ESC key.
-- 
+- To close the application press the ESC key.
+  
 
