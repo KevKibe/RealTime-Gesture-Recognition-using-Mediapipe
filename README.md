@@ -2,7 +2,8 @@
 - This is a project that showcases finetuning a model and performing gesture recognition of 21 different gestures using Mediapipe from Google.
 - The [notebook](https://github.com/KevKibe/Gesture-Recognition-using-Mediapipe/blob/main/finetuning_handrecognition_model.ipynb) shows how I trained the baseline model that achieved 83% accuracy and two finetuned models that achieved 88% accuracy all on the test set.
 - The file [gesture_recognition.py](https://github.com/KevKibe/Gesture-Recognition-using-Mediapipe/blob/main/gesture_recognition.py) contains the code base to put the models to use using a live webcam feed. Scroll below to the usage section.
-
+- The file [hands_landmark.py](https://github.com/KevKibe/Gesture-Recognition-using-Mediapipe/blob/main/hands_landmark.py) is an experimental code snippet that uses hand landmarks from Mediapipe to recognize gestures and if statement to execute a print function whenever the gesture is detected(it doesnt use a pretrained model.
+  
 ## Dataset
 - The dataset is a combination of two datasets and you can get it [here](https://drive.google.com/file/d/1ILwgfolCd6Z6ar0WiDld_h-lYKYicWNk/view?usp=sharing). <br>
   **A sample of the data in the dataset**<br>
