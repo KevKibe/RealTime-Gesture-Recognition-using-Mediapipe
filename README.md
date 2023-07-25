@@ -1,9 +1,7 @@
-## Description
-
-
+## Demo
 https://github.com/KevKibe/RealTime-Gesture-Recognition-using-Mediapipe/assets/86055894/ff3545a8-032b-40aa-8685-f14d780a8e91
 
-
+## Description
 - This is a project that showcases finetuning a model and performing gesture recognition of 21 different gestures using Mediapipe from Google.
 - The [notebook](https://github.com/KevKibe/Gesture-Recognition-using-Mediapipe/blob/main/finetuning_handrecognition_model.ipynb) shows how I trained the baseline model that achieved 83% accuracy and two finetuned models that achieved 88% accuracy all on the test set.
 - The file [gesture_recognition.py](https://github.com/KevKibe/Gesture-Recognition-using-Mediapipe/blob/main/gesture_recognition.py) contains the code base to put the models to use using a live webcam feed. Scroll below to the usage section.
