@@ -1,6 +1,8 @@
 ## Description
-<video src="https://github.com/KevKibe/RealTime-Gesture-Recognition-using-Mediapipe/blob/main/725efe81-3c4f-44df-a841-e0d428b3b026_M3xVMf17.mp4" width="400" height="300" controls>
-</video>
+
+
+https://github.com/KevKibe/RealTime-Gesture-Recognition-using-Mediapipe/assets/86055894/ff3545a8-032b-40aa-8685-f14d780a8e91
+
 
 - This is a project that showcases finetuning a model and performing gesture recognition of 21 different gestures using Mediapipe from Google.
 - The [notebook](https://github.com/KevKibe/Gesture-Recognition-using-Mediapipe/blob/main/finetuning_handrecognition_model.ipynb) shows how I trained the baseline model that achieved 83% accuracy and two finetuned models that achieved 88% accuracy all on the test set.
