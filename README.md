@@ -20,8 +20,8 @@ https://github.com/KevKibe/RealTime-Gesture-Recognition-using-Mediapipe/assets/8
 - Install dependencies: `pip install -r requirements.txt`
 
 ## Usage
-- Assign the variable model path to one of the models. For example `model_path = "custom_model_2.task"`.
-- Run the application by running the command `python gesture_recognition.py` in the terminal.
+- Run the application by running the command `py gesture_recognition.py` in the terminal.
+- Test out with different gestures.
 - To close the application press the ESC key.<br>
 
 **:zap: I'm currently open for roles in Data Science, Machine Learning, NLP and Computer Vision.**
