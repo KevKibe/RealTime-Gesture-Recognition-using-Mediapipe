@@ -106,7 +106,7 @@ class GestureRecognizer:
                 for hand_landmarks in result.multi_hand_landmarks:
                     self.mp_draw.draw_landmarks(frame, hand_landmarks, self.mp_hands.HAND_CONNECTIONS,
                                                 self.mp_draw.DrawingSpec(color=(255, 0, 255),thickness=5, circle_radius=5))
-                    self.mp_draw.draw_landmarks(frame, hand_landmarks, self.mp_hands.HAND_CONNECTIONS, connection_drawing_spec=self.mp_draw.DrawingSpec((0, 255, 0), thickness=5, circle_radius=4))
+                    self.mp_draw.draw_landmarks(frame, hand_landmarks, self.mp_hands.HAND_CONNECTIONS, connection_drawing_spec=self.mp_draw.DrawingSpec((0, 255, 0), thickness=5, circle_radius=3))
                     
                     # Detect the gesture and display the text output                        
                     if self.detect_peace_sign(hand_landmarks):
